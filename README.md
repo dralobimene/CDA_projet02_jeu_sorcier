@@ -13,3 +13,6 @@ goals:
 - get skill about projects conception
 - improve code programmation
 - learn git commands
+
+2023 01 11
+state: progress
