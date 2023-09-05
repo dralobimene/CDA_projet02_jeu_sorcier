@@ -26,7 +26,7 @@ class ApprenticeWizard extends Wizard implements \JsonSerializable
 
     // methode obligatoire car la class 
     // implemente l'interface JsonSerializable
-    public function jsonSerialize() {
+    public function jsonSerialize(): array {
         return get_object_vars($this);
      }
 
