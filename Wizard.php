@@ -1,6 +1,79 @@
 <?php
 
+class Wizard implements \JsonSerializable {
+    public $name;
+    public $health;
+    public $power;
+    public $surnom;
 
+  public function __construct(
+    string $name,
+    int $health,
+    int $power,
+    string $surnom) {
+        $this->name = $name;
+        $this->health = $health;
+        $this->power = $power;
+        $this->surnom = $surnom;
+    }
+
+    public function getName():string {
+        return $this->name;
+    }
+    public function setName(string $name) :void {
+        $this->name = $name;
+    }
+    public function getHealth():int {
+        return $this->health;
+    }
+    public function setHealth(int $health) :void {
+        $this->health = $health;
+    }
+    public function getPower():int {
+        return $this->power;
+    }
+    public function setPower(int $power) :void {
+        $this->power = $power;
+    }
+    public function getSurnom():string {
+        return $this->surnom;
+    }
+    public function setSurnom(string $surnom) :void {
+        $this->surnom = $surnom;
+    }
+
+    // methode obligatoire car implementation de l'interface
+    // JsonSerializable
+    public function jsonSerialize(): array {
+        return get_object_vars($this);
+     }
+
+     //
+     public function randomPercent(): int {
+         return rand(0, 100) / 100;
+    }
+
+    //
+    public function fight(Wizard $target) :void {
+        echo "affichage de la methode fight()";
+        echo "<br>";
+        while ($this->health > 0 && $target->health > 0) {
+            $target->health -= $this->power;
+            if($target->health <= 0){
+                echo $this->name.' won the fight ';
+                return;
+            }
+            $this->health -= $target->power;
+            if($this->health <= 0){
+                echo $target->name.' won the fight ';
+                return;
+            }
+        }
+}
+
+
+
+/*
 class Wizard implements \JsonSerializable
 {
 
@@ -72,7 +145,7 @@ class Wizard implements \JsonSerializable
     public function jsonSerialize() {
         return get_object_vars($this);
      }
-    
+
     // methodes persos
     public function drinkPotion(): void
     {
@@ -88,4 +161,5 @@ class Wizard implements \JsonSerializable
     {
         $target->setPV($target->getPV() - $this->damages);
     }
+ */
 }
